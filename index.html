@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANK</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="onLoadFunct()">
+    <header class="head">
+        <h1 class="text-5xl font-bold text-center mt-16">
+            Welcome To <span class="text-indigo-700">Rizvi's Bank</span>
+        </h1>
+    </header>
+
+    <main>
+        <section class="login-section w-3/4 mx-auto bg-purple-600 mt-8 p-8 rounded-lg">
+            <h3 class="text-center text-2xl mb-4">Please Login</h3>
+            <h3 id="success-login" class="text-center text-2xl mb-4"></h3>
+            <div class="flex flex-col items-center">
+                <input id="user-email" class="border-2 block w-1/4 mb-4 border-green-200 rounded-lg px-2 py-1"
+                    type="text" placeholder="Enter Your Email">
+                <input id="user-password" class="border-2 block w-1/4 mb-4 border-green-200 rounded-lg px-2 py-1"
+                    type="password" placeholder="Enter Your Password">
+                <button id="submit-login" class="bg-green-200 rounded-lg px-4 py-2 w-1/4">LOGIN</button>
+            </div>
+        </section>
+    </main>
+
+
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANKING PAGE</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="onLoadFunctTwo()">
+    <header class="head">
+        <h1 class="text-5xl font-bold text-center mt-16">
+            Client <span class="text-indigo-700">BANKING PAGE</span>
+        </h1>
+    </header>
+    <main>
+        <section class="balance-section mt-16">
+            <div class="grid grid-cols-3 gap-4 w-3/4 mx-auto">
+                <div class="bg-green-400 text-white text-center px-4 py-8 rounded-lg">
+                    <h1 class="text-2xl font-semibold mt-2">Deposite</h1>
+                    <h1 class="text-4xl font-bold">$<span id="total-diposite">00.00</span></h1>
+                </div>
+                <div class="bg-yellow-500 text-white text-center px-4 py-8 rounded-lg">
+                    <h1 class="text-2xl font-semibold mt-2">Balance</h1>
+                    <h1 class="text-4xl font-bold">$<span id="total-balance">72000</span></h1>
+                </div>
+                <div class="bg-pink-700 text-white text-center px-4 py-8 rounded-lg">
+                    <h1 class="text-2xl font-semibold mt-2">Withdrawn</h1>
+                    <h1 class="text-4xl font-bold">$<span id="total-withdrawn">1700.00</span></h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="balance-section mt-16">
+            <div class="grid grid-cols-2 gap-4 w-3/4 mx-auto">
+                <div class="bg-green-400 text-white text-center px-4 py-8 rounded-lg">
+                    <h1 class="text-2xl font-semibold mt-2 mb-2">Please Deposite</h1>
+                    <h2 id="diposite-confirm" class="text-xl font-semibold mt-2 mb-2 text-pink-700"></h2>
+                    <input id="diposite-amount"
+                        class="text-black border-2 block w-3/4 mx-auto mb-4 border-green-200 rounded-lg px-2 py-1"
+                        type="text" placeholder="Please Enter the Amount of Diposite">
+                    <button id="diposite-btn" class="bg-pink-700 rounded-lg px-4 py-2 w-2/4 mx-auto">Diposite</button>
+                </div>
+                <div class="bg-yellow-500 text-white text-center px-4 py-8 rounded-lg">
+                    <h1 class="text-2xl font-semibold mt-2 mb-2">Please Withdraw</h1>
+                    <h2 id="withdraw-confirm" class="text-white-500 text-xl font-semibold mt-2 mb-2"></h2>
+                    <input id="withdraw-amount"
+                        class="text-black border-2 block w-3/4 mx-auto mb-4 border-green-200 rounded-lg px-2 py-1"
+                        type="text" placeholder="Please Enter the Amount of withdraw">
+                    <button id="withdraw-btn" class="bg-purple-600 rounded-lg px-4 py-2 w-2/4 mx-auto">Withdraw</button>
+
+                </div>
+            </div>
+            <button id="logout-btn"
+                class="block bg-green-200 rounded-lg px-4 py-2 w-1/4 mx-auto mt-16 mb-16">LOGOUT</button>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
