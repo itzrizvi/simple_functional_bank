@@ -1,99 +1,98 @@
-// Login Page Scripts
-function onLoadFunct() {
-    document.getElementById('submit-login').addEventListener('click', function () {
-        const emailField = document.getElementById('user-email');
-        const userEmail = emailField.value.toLowerCase();
-        const passwordField = document.getElementById('user-password');
-        const userPassword = passwordField.value;
+function onLoadFunctOne() {
 
-        // Login Validation
-        if (userEmail == 'shahriar.me.work@gmail.com' && userPassword == '01766922253') {
-            const successMsg = document.getElementById('success-login');
-            successMsg.innerText = 'Login Success';
-            successMsg.style.color = 'white';
-            successMsg.style.fontWeight = '700';
+    // Login Validation
+    document.getElementById('submit-login').addEventListener('click', function () {
+        const getUserEmail = document.getElementById('user-email');
+        const getUserPass = document.getElementById('user-password');
+        const getUserEmailValue = getUserEmail.value.toLowerCase();
+        const getUserPassValue = getUserPass.value;
+        if (getUserEmailValue == 'shahriar.me.work@gmail.com' && getUserPassValue == '01766922253') {
+            const confirmMsg = document.getElementById('success-login');
+            confirmMsg.innerText = 'Login Success!!';
+            confirmMsg.style.color = 'white';
+            confirmMsg.style.fontWeight = '900';
             window.location.href = 'banking.html';
         }
         else {
-            const failedMsg = document.getElementById('success-login');
-            failedMsg.innerText = 'Login Failed';
-            failedMsg.style.color = 'red';
-            failedMsg.style.fontWeight = '700';
+            const confirmMsg = document.getElementById('success-login');
+            confirmMsg.innerText = 'Invalid Login!!';
+            confirmMsg.style.color = 'crimson';
+            confirmMsg.style.fontWeight = '900';
         }
     });
 }
 
-
-
-// Banking Page Scripts
-
 function onLoadFunctTwo() {
+    // Getting Input Value Function
+    function getInputValue(inputId) {
+        const getInput = document.getElementById(inputId);
+        const getInputTxt = getInput.value;
+        const getInputNumber = parseFloat(getInputTxt);
+        getInput.value = null;
+        return getInputNumber;
+    }
+    // Getting Output Text Value Function
+    function getOutputText(outputText, inputValue) {
+        const getOutput = document.getElementById(outputText);
+        const getOutputTxt = getOutput.innerText;
+        const getOutputNumber = parseFloat(getOutputTxt);
+        getOutput.innerText = getOutputNumber + inputValue;
+    }
+    // Get Current Balance
+    function getCurrentBalance() {
+        const getExitingBalance = document.getElementById('total-balance');
+        const getExistingBalanceTxt = getExitingBalance.innerText;
+        const getExistingBalanceNumber = parseFloat(getExistingBalanceTxt);
+        return getExistingBalanceNumber;
+    }
+    // Updating Balance Function
+    function updateBalance(newBalance, isAdd) {
+        const getExitingBalance = document.getElementById('total-balance');
+        const currentBalanceTotal = getCurrentBalance();
 
-    // Diposite Event
+        if (isAdd == true) {
+            getExitingBalance.innerText = currentBalanceTotal + newBalance;
+        }
+        else {
+            getExitingBalance.innerText = currentBalanceTotal - newBalance;
+        }
+    }
+    // DIPOSITE EVENT HANDLING 
     document.getElementById('diposite-btn').addEventListener('click', function () {
-        // Getting The Deposite Amount 
-        const amountField = document.getElementById('diposite-amount');
-        const userDiposite = amountField.value;
-        const dipositeAmountNumber = parseFloat(userDiposite);
-
-        // Calculating Diposite
-        const totalDiposite = document.getElementById('total-diposite');
-        const previusDeposite = totalDiposite.innerText;
-        const previousDepositeNumber = parseFloat(previusDeposite);
-        const newDepositeTotal = dipositeAmountNumber + previousDepositeNumber;
-        totalDiposite.innerText = newDepositeTotal;
-
-        // Updating Balance
-        const UserBalance = document.getElementById('total-balance');
-        const existingbalanceTotal = UserBalance.innerText;
-        const existingBalanceNumber = parseFloat(existingbalanceTotal);
-        const newBalance = dipositeAmountNumber;
-        const totalNewBalance = existingBalanceNumber + newBalance;
-        UserBalance.innerText = totalNewBalance;
-
-        const confirmationTxt = document.getElementById('diposite-confirm');
-        confirmationTxt.innerText = 'You have successfully diposited $' + newDepositeTotal;
-
-
-        // Clearing Input
-        amountField.value = null;
+        const dipositeInputValue = getInputValue('diposite-amount');
+        if (dipositeInputValue > 0 && typeof (dipositeInputValue) == 'number') {
+            getOutputText('total-diposite', dipositeInputValue);
+            updateBalance(dipositeInputValue, true);
+            const confirmMSG = document.getElementById('diposite-confirm');
+            confirmMSG.innerText = 'You have Successfully Diposited $' + dipositeInputValue;
+        } else {
+            const errorMSG = document.getElementById('diposite-confirm');
+            errorMSG.innerText = 'Please Input a Numeric and Positive Value';
+        }
     });
 
-    // Withdraw Event
+    // WITHDRAW EVENT HANDLING
     document.getElementById('withdraw-btn').addEventListener('click', function () {
-
-        // Getting Withdraw Amount
-        const existingwithdrawnAmount = document.getElementById('total-withdrawn');
-        const existingwithdrawnAmountText = existingwithdrawnAmount.innerText;
-        const existingWithdrawnNumber = parseFloat(existingwithdrawnAmountText);
-
-        // Calculating total Withdraw
-        const withdrawingPresent = document.getElementById('withdraw-amount');
-        const withdrawAmountValue = withdrawingPresent.value;
-        const withdrawAmountValueNumber = parseFloat(withdrawAmountValue);
-        const totalWithdrawnTill = existingWithdrawnNumber + withdrawAmountValueNumber;
-        existingwithdrawnAmount.innerText = totalWithdrawnTill;
-
-        // Updating Balance after withdraw
-        const UserBalance = document.getElementById('total-balance');
-        const existingbalanceTotal = UserBalance.innerText;
-        const existingBalanceNumber = parseFloat(existingbalanceTotal);
-        const totalNewBalanceAfWith = existingBalanceNumber - withdrawAmountValueNumber;
-        UserBalance.innerText = totalNewBalanceAfWith;
-
-        const confirmationTxtTwo = document.getElementById('withdraw-confirm');
-        confirmationTxtTwo.innerText = 'You have successfully withdrawn $' + totalWithdrawnTill;
-
-        // Clearing Input 
-        withdrawingPresent.value = null;
-
+        const withdrawInputValue = getInputValue('withdraw-amount');
+        const currentBalForWithdrw = getCurrentBalance();
+        if (currentBalForWithdrw >= withdrawInputValue) {
+            if (withdrawInputValue > 0) {
+                getOutputText('total-withdrawn', withdrawInputValue);
+                updateBalance(withdrawInputValue, false);
+                const confirmMSG = document.getElementById('withdraw-confirm');
+                confirmMSG.innerText = 'You have Successfully Withdrawn $' + withdrawInputValue;
+            } else {
+                const errorMSG = document.getElementById('withdraw-confirm');
+                errorMSG.innerText = 'Please Input a Numeric and Positive Value';
+            }
+        } else {
+            const newErrorMSG = document.getElementById('withdraw-confirm');
+            newErrorMSG.innerText = 'Insufficient Balance or Invalid Input';
+        }
     });
-
+    // Logout Button Event
     document.getElementById('logout-btn').addEventListener('click', function () {
         window.location.href = 'index.html';
     });
-
-
-
-
 }
+
